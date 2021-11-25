@@ -1,21 +1,72 @@
-# NPM package skeleton
+# Skin Preset
 
-## Getting started
+Storinka skin preset module.
 
-1. Clone the repository:
+## Installation
 
 ```shell
-git clone https://github.com/storinka/package-skeleton
+yarn add @storinka/skin-preset
 ```
 
-2. Open `package.json` and update change package `name`, `description` etc.
-3. Open `README.md` and update its content.
+## Usage
 
-## Development
+```js
+import SkinPreset, { applyPreset } from "@storinka/skin-preset";
 
-To start development server run `yarn run dev`, it will start [ts-node-dev](https://github.com/wclr/ts-node-dev).
+const presetSchema = {
+    skin: 'modern',
+    name: 'default',
+    version: '0.0.1',
 
-## Publishing
+    common: {
+        bgColor: {
+            type: 'color',
+            value: 'white',
+        },
+        borderRadius: {
+            type: 'size',
+            value: '10px',
+        },
+    },
+    card: {
+        bgColor: {
+            type: 'color',
+            value: 'default', // will use bgColor from common
+        },
+        borderRadius: {
+            type: 'size',
+            value: '$borderRadius', // will use borderRadius from common
+        },
+    }
+};
 
-1. Open `package.json` and increment the `version`.
-2. Run `bash publish.sh` script.
+const darkConfig = {
+    skin: 'modern',
+    name: 'dark',
+    version: '0.0.1',
+    
+    common: {
+        bgColor: 'black',
+        borderRadius: '20px',
+    },
+    card: {
+        bgColor: 'default',
+        borderRadius: 'default',
+    },
+};
+
+const preset = new new SkinPreset(
+    presetSchema,
+);
+
+// apply default preset
+applyPreset(preset);
+
+const darkPreset = new new SkinPreset(
+    presetSchema,
+    darkConfig,
+);
+
+// apply dark preset
+applyPreset(darkPreset);
+```

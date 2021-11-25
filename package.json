@@ -1,9 +1,9 @@
 {
-  "name": "@storinka/package-skeleton",
+  "name": "@storinka/skin-preset",
   "version": "0.0.1",
-  "description": "The package description.",
+  "description": "Storinka skin preset module.",
   "main": "index.js",
-  "repository": "https://github.com/storinka/package-skeleton",
+  "repository": "https://github.com/storinka/skin-preset",
   "author": "kohutd <davyd.kohut@gmail.com>",
   "license": "MIT",
   "private": false,
