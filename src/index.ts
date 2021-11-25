@@ -49,7 +49,7 @@ class SkinPreset<S extends SkinPresetSchema = SkinPresetSchema> {
         }
     }
 
-    makeConfig(): SkinPresetConfig {
+    makeConfig(): SkinPresetConfig | any {
         const config: {
             common: { [key: string]: string | number | boolean },
 
@@ -80,7 +80,7 @@ class SkinPreset<S extends SkinPresetSchema = SkinPresetSchema> {
         };
     }
 
-    makeReadyToUseConfig(): SkinPresetConfig {
+    makeReadyToUseConfig(): SkinPresetConfig | any {
         const newConfig = this.makeConfig();
 
         Object.entries(newConfig)
@@ -116,7 +116,7 @@ class SkinPreset<S extends SkinPresetSchema = SkinPresetSchema> {
                     }
                 };
 
-                Object.entries(sectionProperties)
+                Object.entries(sectionProperties as { [key: string]: SkinPresetPropertyType })
                     .forEach(([propertyKey, property]) => {
                         sectionProperties[propertyKey] = mapValue(propertyKey, property);
                     });
@@ -170,7 +170,7 @@ export function applyPreset(preset: SkinPreset): void {
                     return;
                 }
 
-                Object.entries(sectionProperties)
+                Object.entries(sectionProperties as { [key: string]: SkinPresetPropertyType })
                     .forEach(([propertyKey, propertyValue]) => {
                         $root.style.setProperty(`--modern-${sectionKey}-${propertyKey}`, String(propertyValue));
                     });
