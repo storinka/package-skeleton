@@ -110,6 +110,14 @@ class SkinPreset<S extends SkinPresetSchema = SkinPresetSchema> {
                             if (value.substring(1) in newConfig.common) {
                                 // @ts-ignore
                                 value = newConfig.common[value.substring(1)];
+                            } else {
+                                // @ts-ignore
+                                const [sectionName, propertyName] = value.substring(1).split(".");
+
+                                if (propertyName) {
+                                    // @ts-ignore
+                                    value = mapValue(propertyName, newConfig[sectionName][propertyName]);
+                                }
                             }
                         }
 
@@ -118,9 +126,9 @@ class SkinPreset<S extends SkinPresetSchema = SkinPresetSchema> {
                 };
 
                 Object.entries(sectionProperties as { [key: string]: SkinPresetPropertyType })
-                    .forEach(([propertyKey, property]) => {
+                    .forEach(([propertyName, property]) => {
                         // @ts-ignore
-                        sectionProperties[propertyKey] = mapValue(propertyKey, property);
+                        sectionProperties[propertyName] = mapValue(propertyName, property);
                     });
             });
 
@@ -187,5 +195,34 @@ export function applyPreset(preset: SkinPreset): void {
             });
     }
 }
+
+
+const a = new SkinPreset({
+    name: "",
+    skin: "",
+    version: "",
+    values: {
+        common: {
+            bgColor: {
+                type: "color",
+                value: "red"
+            },
+        },
+        card: {
+            bgColor: {
+                type: "color",
+                value: "$bgColor"
+            },
+        },
+        dishCard: {
+            bgColor: {
+                type: "color",
+                value: "$card.bgColor"
+            },
+        }
+    }
+})
+
+console.log(a.makeReadyToUseConfig());
 
 export default SkinPreset;
