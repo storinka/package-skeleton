@@ -1,6 +1,6 @@
 {
   "name": "@storinka/skin-preset",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Storinka skin preset module.",
   "main": "index.js",
   "repository": "https://github.com/storinka/skin-preset",

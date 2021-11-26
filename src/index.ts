@@ -7,7 +7,8 @@ export type SkinPresetPropertyType =
     | 'percent' // percentage slider/input
     | 'percent:0-1' // 0-1 slider/input
     | 'option' // single option of list
-    | 'options'; // multiple options of list
+    | 'options'
+    | 'shadow'; // multiple options of list
 
 export type SkinPresetConfig = {
     skin: string;
@@ -21,7 +22,7 @@ export type SkinPresetConfig = {
 
 export type SkinPresetSchemaProperty = {
     type: SkinPresetPropertyType;
-    value: string | number | boolean;
+    value: string | number | boolean | string[] | number[];
     list?: string[] | number[];
 }
 
