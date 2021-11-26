@@ -159,6 +159,13 @@ class SkinPreset<S extends SkinPresetSchema = SkinPresetSchema> {
 
                 Object.entries(sectionProperties)
                     .forEach(([propertyKey, property]) => {
+                        if (!this.schema.values[sectionKey]) {
+                            return;
+                        }
+                        if (!this.schema.values[sectionKey][propertyKey]) {
+                            return;
+                        }
+
                         this.schema.values[sectionKey][propertyKey].value = property;
                     });
             });
