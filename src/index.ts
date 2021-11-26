@@ -118,6 +118,7 @@ class SkinPreset<S extends SkinPresetSchema = SkinPresetSchema> {
 
                 Object.entries(sectionProperties as { [key: string]: SkinPresetPropertyType })
                     .forEach(([propertyKey, property]) => {
+                        // @ts-ignore
                         sectionProperties[propertyKey] = mapValue(propertyKey, property);
                     });
             });
@@ -126,9 +127,17 @@ class SkinPreset<S extends SkinPresetSchema = SkinPresetSchema> {
     }
 
     applyConfig(config: SkinPresetConfig): this {
-        this.schema.skin = config.skin;
-        this.schema.name = config.name;
-        this.schema.version = config.version;
+        if (config.skin) {
+            this.schema.skin = config.skin;
+        }
+
+        if (config.name) {
+            this.schema.name = config.name;
+        }
+
+        if (config.version) {
+            this.schema.version = config.version;
+        }
 
         // todo: handle different versions
         // todo: handle different name/skin (throw an error)
